@@ -27,8 +27,8 @@ public class MediaController {
     public ResponseEntity<?>  getImageByName(@PathVariable("name") String name) throws SQLException {
         byte[] image = mediaService.getImage(name);
         return ResponseEntity.status(HttpStatus.OK)
-                .contentType(MediaType.valueOf("image/png"))
-                .body(image);
+            .contentType(MediaType.valueOf("image/png"))
+            .body(image);
     }
 
     @GetMapping("/info/{name}")
