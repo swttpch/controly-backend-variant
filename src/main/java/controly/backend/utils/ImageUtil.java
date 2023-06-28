@@ -9,7 +9,7 @@ import java.util.zip.Inflater;
 
 public class ImageUtil {
 
-    public static Blob compressImage(byte[] data) throws SQLException {
+    public static byte[] compressImage(byte[] data) {
 
         Deflater deflater = new Deflater();
         deflater.setLevel(Deflater.BEST_COMPRESSION);
@@ -24,16 +24,15 @@ public class ImageUtil {
         }
         try {
             outputStream.close();
-        } catch (Exception ignored) {
+        } catch (Exception e) {
         }
-        return new SerialBlob(outputStream.toByteArray());
+        return outputStream.toByteArray();
     }
 
-    public static Blob decompressImage(Blob data) throws SQLException {
+    public static byte[] decompressImage(byte[] data) {
         Inflater inflater = new Inflater();
-        int blobLength = (int) data.length();
-        inflater.setInput(data.getBytes(1, blobLength));
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream((int) data.length());
+        inflater.setInput(data);
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream(data.length);
         byte[] tmp = new byte[4*1024];
         try {
             while (!inflater.finished()) {
@@ -41,8 +40,8 @@ public class ImageUtil {
                 outputStream.write(tmp, 0, count);
             }
             outputStream.close();
-        } catch (Exception ignored) {
+        } catch (Exception exception) {
         }
-        return new SerialBlob(outputStream.toByteArray());
+        return outputStream.toByteArray();
     }
 }

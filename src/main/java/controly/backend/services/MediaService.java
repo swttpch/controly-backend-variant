@@ -25,9 +25,9 @@ public class MediaService {
     @Autowired
     private MediaMapper mediaMapper;
 
-    public Blob getImage(String name) throws SQLException {
+    public byte[] getImage(String name) throws SQLException {
         MediaDataEntity dbImage = imageDataRepository.findByName(name).orElseThrow(MediaNotFould::new);
-        Blob image = ImageUtil.decompressImage(dbImage.getMediaData());
+        byte[] image = ImageUtil.decompressImage(dbImage.getMediaData());
         return image;
     }
 

@@ -29,8 +29,6 @@ public class MediaDataEntity {
     private String url;
 
     @Lob
-    @Basic(fetch = FetchType.LAZY)
-    @LazyGroup("lobs")
     @Column(name = "mediadata", length = 1000)
-    private Blob mediaData;
+    private byte[] mediaData;
 }

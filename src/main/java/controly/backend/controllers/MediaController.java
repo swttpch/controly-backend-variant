@@ -3,6 +3,7 @@ package controly.backend.controllers;
 
 import controly.backend.entities.MediaDataEntity;
 import controly.backend.services.MediaService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -24,7 +25,7 @@ public class MediaController {
     // TO FIX: retornar a imagem
     @GetMapping("/{name}")
     public ResponseEntity<?>  getImageByName(@PathVariable("name") String name) throws SQLException {
-        Blob image = mediaService.getImage(name);
+        byte[] image = mediaService.getImage(name);
         return ResponseEntity.status(HttpStatus.OK)
                 .contentType(MediaType.valueOf("image/png"))
                 .body(image);
