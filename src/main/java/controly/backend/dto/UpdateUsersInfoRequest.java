@@ -10,7 +10,6 @@ public class UpdateUsersInfoRequest {
     private String name;
     @Pattern(regexp = "^[A-Za-z][A-Za-z0-9_]{5,14}$", message="Invalid nickname!")
     private String nickname;
-    private String password;
     @Email
     private String email;
 }

@@ -26,10 +26,6 @@ public class UserController {
 
   @Autowired
   private UserService userService;
-//    @Autowired
-//    private PasswordRecoveryService passwordRecoveryService;
-//    @Autowired
-//    private ProfileService profileService;
 
     @GetMapping("/{id}")
     public ResponseEntity<UserResponse> getUserById(@PathVariable Long id) {

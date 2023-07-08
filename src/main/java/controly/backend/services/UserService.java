@@ -2,10 +2,7 @@ package controly.backend.services;
 
 import controly.backend.dto.*;
 import controly.backend.entities.UserEntity;
-import controly.backend.exceptions.EmailAlreadyExistsException;
-import controly.backend.exceptions.NicknameAlreadyExistsException;
-import controly.backend.exceptions.UserAlreadyDisabledException;
-import controly.backend.exceptions.UsersIdNotFould;
+import controly.backend.exceptions.*;
 import controly.backend.mappers.UserMapper;
 import controly.backend.repositories.UserRepository;
 import jakarta.transaction.Transactional;
@@ -46,7 +43,9 @@ public class UserService {
 
   @Transactional
   public UserEntity getUserById(Long id) {
-    return userRepository.findById(id).orElseThrow(UsersIdNotFould::new);
+    UserEntity user =  userRepository.findById(id).orElseThrow(UsersIdNotFould::new);
+    if (!user.getIsActive()) throw new UserIsDisabledException();
+    return user;
   }
 
   @Transactional
@@ -104,11 +103,5 @@ public class UserService {
     UserResponse userResponse = new UserResponse();
     userMapper.getResponseDtoFromUser(user, userResponse);
     return userResponse;
-  }
-
-  public String generateNewToken() {
-    byte[] randomBytes = new byte[15];
-    secureRandom.nextBytes(randomBytes);
-    return base64Encoder.encodeToString(randomBytes);
   }
 }

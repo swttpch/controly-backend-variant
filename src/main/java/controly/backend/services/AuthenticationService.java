@@ -3,6 +3,7 @@ package controly.backend.services;
 import controly.backend.dto.AuthenticationResponse;
 import controly.backend.dto.CreateNewUserRequest;
 import controly.backend.dto.LoginRequest;
+import controly.backend.entities.PasswordRecoveryEntity;
 import controly.backend.entities.UserEntity;
 import controly.backend.enums.Role;
 import controly.backend.exceptions.EmailNotFoundException;

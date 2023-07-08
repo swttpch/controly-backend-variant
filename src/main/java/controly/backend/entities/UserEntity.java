@@ -2,6 +2,7 @@ package controly.backend.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import controly.backend.enums.Role;
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,6 +23,7 @@ import java.util.Set;
 @Table(name="tbUser")
 @NoArgsConstructor
 @AllArgsConstructor
+@SecondaryTable(name= "tbRecoveryPassword", pkJoinColumns = @PrimaryKeyJoinColumn(name = "idUser"))
 @Builder
 @Data
 public class UserEntity implements Serializable, UserDetails {
@@ -68,6 +70,9 @@ public class UserEntity implements Serializable, UserDetails {
       joinColumns = @JoinColumn(name = "user_id"),
       inverseJoinColumns = @JoinColumn(name = "topic_id"))
   private Set<TopicEntity> followedTopics;
+
+  @Embedded @Nullable
+  private PasswordRecoveryEntity passwordRecoveryEntity;
 
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
