@@ -20,7 +20,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/api/v1/users")
 @CrossOrigin(origins = "*")
 public class UserController {
 
@@ -68,13 +68,6 @@ public class UserController {
                                                   @RequestBody @Valid UpdateUsersInfoRequest form)  {
         UserResponse user = userService.updateUsersInfo(id, form);
         return ResponseEntity.status(200).body(user);
-    }
-
-    @PostMapping("/upload/{id}")
-    public ResponseEntity<?> uploadImage(@PathVariable Long id,@RequestParam("image") MultipartFile file) throws IOException, SQLException {
-      ResponseEntity<String> response = userService.uploadUserProfileImage(id,file);
-      return ResponseEntity.status(HttpStatus.OK)
-              .body(response);
     }
 
 //    @PostMapping("/password-recovery")

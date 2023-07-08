@@ -18,13 +18,14 @@ import java.util.function.Function;
 @Service
 public class JwtService {
   private static final String SECRET_KEY = "9785f87a6b2f86d3181be5cc7b51c81b12bdeebc919c24de21449a83beffc4c2";
+
   public String extractUsername(String token) {
     return extractClaim(token, Claims::getSubject);
   }
 
   public String generateToken(
       UserDetails userDetails
-  ){
+  ) {
     return generateToken(new HashMap<>(), userDetails);
   }
 
@@ -43,7 +44,7 @@ public class JwtService {
 
   }
 
-  public boolean isTokenValid(String token, UserDetails userDetails){
+  public boolean isTokenValid(String token, UserDetails userDetails) {
     final String username = extractUsername(token);
     return (username.equals(userDetails.getUsername())) && !isTokenExpired(token);
   }
@@ -56,12 +57,12 @@ public class JwtService {
     return extractClaim(token, Claims::getExpiration);
   }
 
-  public <T> T extractClaim(String token, Function<Claims, T> claimsResolver){
+  public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
     final Claims claims = extractAllClaims(token);
     return claimsResolver.apply(claims);
   }
 
-  private Claims extractAllClaims(String token){
+  private Claims extractAllClaims(String token) {
     return (Claims) Jwts
         .parserBuilder()
         .setSigningKey(getSignKey())

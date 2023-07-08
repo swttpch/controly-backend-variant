@@ -27,7 +27,7 @@ import java.util.Set;
 public class UserEntity implements Serializable, UserDetails {
   private static final long serialVersionUID = 1L;
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "idUser")
   private Long idUser;
   private String name;
@@ -37,6 +37,7 @@ public class UserEntity implements Serializable, UserDetails {
   private String password;
   @Column(unique = true, nullable = false)
   private String email;
+
   private Boolean isActive;
   private Long idGithub;
   @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
@@ -45,12 +46,8 @@ public class UserEntity implements Serializable, UserDetails {
   private Date createdAt;
   @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
   private Date updatedAt;
-  @OneToOne
-  private MediaDataEntity profilePicture;
-
   @Enumerated(EnumType.STRING)
   private Role role;
-
   @ManyToMany
   @JoinTable(
       name = "tb_post_like",

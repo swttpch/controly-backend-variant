@@ -20,8 +20,6 @@ public class TopicSuggestionEntity {
   private String about;
   @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
   private Date createdAt;
-  @OneToOne
-  private MediaDataEntity topicPicture;
   @ManyToOne @JoinColumn(name = "idUser", referencedColumnName = "idUser")
   private UserEntity owner;
 }

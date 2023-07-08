@@ -48,6 +48,4 @@ public class PostEntity {
     private Date createdIn;
     @Column(name = "updatedIn")
     private Date updatedIn;
-
-
 }

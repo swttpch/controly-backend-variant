@@ -26,8 +26,6 @@ public class TopicEntity implements Serializable {
     private Date createdAt;
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date updatedAt;
-    @OneToOne
-    private MediaDataEntity topicPicture;
     @ManyToMany(mappedBy = "followedTopics")
     private Set<UserEntity> follows;
     @ManyToMany(mappedBy = "topics")

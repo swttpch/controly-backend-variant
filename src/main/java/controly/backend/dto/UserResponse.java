@@ -1,9 +1,6 @@
 package controly.backend.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import controly.backend.entities.MediaDataEntity;
-import jakarta.persistence.Column;
-import jakarta.persistence.OneToOne;
 import lombok.Data;
 
 import java.util.Date;
@@ -22,6 +19,4 @@ public class UserResponse {
   private Date createdAt;
   @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
   private Date updatedAt;
-
-  private MediaFileResponse profilePicture;
 }
