@@ -6,22 +6,18 @@ import controly.backend.entities.PasswordRecoveryEntity;
 import controly.backend.entities.UserEntity;
 import controly.backend.exceptions.EmailNotFoundException;
 import controly.backend.exceptions.InvalidTokenException;
-import controly.backend.exceptions.PasswordAlreadyChangedException;
 import controly.backend.exceptions.PasswordNotMatchException;
 import controly.backend.repositories.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.security.SecureRandom;
-import java.util.Base64;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Objects;
 
 import static controly.backend.constants.Urls.clientUrl;
+import static controly.backend.utils.TokenUtils.generateNewToken;
 
 @Service
 @RequiredArgsConstructor
@@ -29,8 +25,6 @@ public class PasswordRecoveryService {
 final private EmailService sendEmail;
 
  final private UserRepository userRepository;
-  final private static SecureRandom secureRandom = new SecureRandom();
-  final private static Base64.Encoder base64Encoder = Base64.getUrlEncoder();
 
   private final PasswordEncoder passwordEncoder;
 
@@ -71,9 +65,4 @@ final private EmailService sendEmail;
     userRepository.save(userEntity);
   }
 
-  public static String generateNewToken() {
-    byte[] randomBytes = new byte[24];
-    secureRandom.nextBytes(randomBytes);
-    return base64Encoder.encodeToString(randomBytes);
-  }
 }

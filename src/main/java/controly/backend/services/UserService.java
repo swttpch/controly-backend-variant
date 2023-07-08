@@ -1,6 +1,9 @@
 package controly.backend.services;
 
-import controly.backend.dto.*;
+import controly.backend.dto.CreateNewUserRequest;
+import controly.backend.dto.SimplifiedUserResponse;
+import controly.backend.dto.UpdateUsersInfoRequest;
+import controly.backend.dto.UserResponse;
 import controly.backend.entities.UserEntity;
 import controly.backend.exceptions.*;
 import controly.backend.mappers.UserMapper;

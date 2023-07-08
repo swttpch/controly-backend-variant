@@ -5,7 +5,6 @@ import controly.backend.dto.*;
 import controly.backend.services.AuthenticationService;
 import controly.backend.services.PasswordRecoveryService;
 import jakarta.validation.Valid;
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +19,7 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity<AuthenticationResponse> register(@RequestBody @Valid CreateNewUserRequest user) {
-      return ResponseEntity.ok(authenticationService.register(user));
+      return ResponseEntity.status(201).body(authenticationService.register(user));
     }
 
   @PostMapping("/authenticate")
