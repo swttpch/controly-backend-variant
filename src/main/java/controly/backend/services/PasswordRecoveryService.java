@@ -47,7 +47,7 @@ final private EmailService sendEmail;
         .build();
     user.setPasswordRecoveryEntity(passwordRecovery);
     var content = clientUrl + "/password-update?token=" +  user.getPasswordRecoveryEntity().getToken();
-    sendEmail.sendEmail(user.getName(),user.getEmail(), content);
+    sendEmail.sendEmail("Recupere a sua senha - Controly",user.getEmail(), content);
   }
 
   public boolean isPasswordRecoveryTokenValid(String token) {

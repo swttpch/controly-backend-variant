@@ -11,12 +11,12 @@ import org.springframework.web.server.ResponseStatusException;
 @RequiredArgsConstructor
 public class EmailService {
   private final JavaMailSender mailSender;
-  public void sendEmail(String name, String email, String content) {
+  public void sendEmail(String subject, String email, String content) {
     try {
       SimpleMailMessage message = new SimpleMailMessage();
       message.setFrom("suporte.controly@gmail.com");
       message.setTo(email);
-      message.setSubject("Solicitação de Troca de Senha - ControlY");
+      message.setSubject(subject);
       message.setText(content);
       mailSender.send(message);
     } catch (Exception err) {

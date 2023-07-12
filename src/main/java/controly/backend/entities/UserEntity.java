@@ -72,6 +72,7 @@ public class UserEntity implements Serializable, UserDetails {
 
   @Embedded @Nullable
   private PasswordRecoveryEntity passwordRecoveryEntity;
+  private String validationCode;
 
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -101,5 +102,13 @@ public class UserEntity implements Serializable, UserDetails {
   @Override
   public boolean isEnabled() {
     return true;
+  }
+
+  public String getValidationCode() {
+    return validationCode;
+  }
+
+  public void setValidationCode(String validationCode) {
+    this.validationCode = validationCode;
   }
 }

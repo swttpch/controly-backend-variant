@@ -17,10 +17,21 @@ public class AuthController {
   private final AuthenticationService authenticationService;
   private final PasswordRecoveryService passwordRecovery;
 
-    @PostMapping("/register")
-    public ResponseEntity<AuthenticationResponse> register(@RequestBody @Valid CreateNewUserRequest user) {
-      return ResponseEntity.status(201).body(authenticationService.register(user));
-    }
+  @PostMapping("/register")
+  public ResponseEntity<Long> register(@RequestBody @Valid CreateNewUserRequest user) {
+    var newUser = authenticationService.register(user);
+    return ResponseEntity.status(201).body(newUser.getIdUser());
+  }
+
+  @PostMapping("/validate")
+  public ResponseEntity<AuthenticationResponse> validate(@RequestBody @Valid ValidateUserRequest user) {
+    return ResponseEntity.status(200).body(authenticationService.validateUser(user.getIdUser(), user.getCode()));
+  }
+  @PostMapping("/revalidate/{id}")
+  public ResponseEntity<?> revalidate(@PathVariable Long id) {
+    authenticationService.resendValidation(id);
+    return ResponseEntity.status(200).build();
+  }
 
   @PostMapping("/authenticate")
   public ResponseEntity<AuthenticationResponse> authenticate(@RequestBody @Valid LoginRequest user) {
